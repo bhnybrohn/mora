@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.pub/
+build/
+flutter_app/.dart_tool/
+flutter_app/.packages/
+flutter_app/build/
+__pycache__/
+*.pyc
+.env
+*.env
+.DS_Store
+*.log
+*.zip

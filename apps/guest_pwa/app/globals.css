@@ -1,0 +1,110 @@
+:root {
+  /* Backgrounds */
+  --bg-base: #0F0A06;
+  --bg-elevated: #1A130C;
+  --bg-overlay: #261C13;
+
+  /* Text */
+  --text-primary: #F5EFE6;
+  --text-secondary: #B8A99A;
+  --text-tertiary: #7A6E60;
+  --text-disabled: #4A4138;
+
+  /* Accent */
+  --accent: #D9A85C;
+  --accent-hover: #E6B66B;
+  --accent-muted: #6B5530;
+
+  /* Semantic */
+  --positive: #7FA868;
+  --warning: #D89F4A;
+  --negative: #C77859;
+
+  /* Borders */
+  --border-subtle: rgba(245, 239, 230, 0.08);
+  --border-emphasis: rgba(245, 239, 230, 0.16);
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Fonts */
+  --font-display: 'Fraunces', 'New York', Georgia, serif;
+  --font-body: 'Switzer', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+}
+
+.mora-display {
+  font-family: var(--font-display);
+  font-weight: 350;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 96, 'SOFT' 100, 'WONK' 0;
+}
+
+.mora-display-hero {
+  font-family: var(--font-display);
+  font-weight: 320;
+  letter-spacing: -0.03em;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+}
+
+.mora-display-italic {
+  font-style: italic;
+}
+
+.mora-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.mora-mono {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum';
+}
+
+button {
+  font-family: inherit;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+@keyframes mora-fadein {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mora-shutter {
+  0%   { opacity: 0; }
+  40%  { opacity: 0.7; }
+  100% { opacity: 0; }
+}
+
+.fade-in {
+  animation: mora-fadein 0.42s var(--ease-out) both;
+}
+
+/* Hide scrollbars where appropriate */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }

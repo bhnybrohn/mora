@@ -1,0 +1,51 @@
+# Local dev stack for the Mora API.
+#
+# Brings up Postgres 16 and Redis 7. The API itself runs on the host (so
+# `uvicorn --reload` works snappily); only the stateful services live in
+# Docker.  Persistent volumes keep data across `docker compose down`.
+#
+# Usage:
+#   docker compose up -d         # start in background
+#   docker compose ps            # see status
+#   docker compose logs -f       # tail logs
+#   docker compose down          # stop (keeps data)
+#   docker compose down -v       # stop and wipe the volumes
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: mora-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mora
+      POSTGRES_PASSWORD: mora
+      POSTGRES_DB: mora
+    ports:
+      # 5432 is taken on the host by another project — exposing on 5434.
+      - "5434:5432"
+    volumes:
+      - mora_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mora -d mora"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: mora-redis
+    restart: unless-stopped
+    ports:
+      # 6379 is taken on the host by another project — exposing on 6381.
+      - "6381:6379"
+    volumes:
+      - mora_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  mora_pg:
+  mora_redis:
